@@ -1,17 +1,15 @@
 'use strict';
-module.exports = function() {
-	var _key;
-	var _value;
+function vault() {
+	var theVault = {};
   	function setValue(key, value) {
-  		_key = key;
-  		_value = value;
+  		theVault[key] = value; //create new key and set value
   	}
 
   	function getValue(key) {
-  		if(_key) {
-  			return _value;
+  		if(theVault[key]) { //key exists
+  			return theVault[key];
   		}
-  		return null;
+  		return null; //key does not exist
   	}
 
   	return {
@@ -19,3 +17,14 @@ module.exports = function() {
   		getValue: getValue
   	};
 };
+
+//test cases
+module.exports = vault;
+var v = vault();
+
+v.setValue('a', 1);
+console.log(v.getValue('a')); //expected: 1
+v.setValue('b', 2);
+console.log(v.getValue('a')); //expected: 1
+console.log(v.getValue('b')); //expected: 2
+
